@@ -1,15 +1,13 @@
-
-import * as Type from '../Actions/types'
 const initState = {}
 
 const authReducer = (state = initState, action) => { 
     switch( action.type ) { 
-        case Type.LOGIN_ERROR : 
+        case "LOGIN_ERROR" : 
             return {
                 ...state,
                 authError: "Login Failed"
             }
-        case Type.LOGIN_SUCCESS:
+        case "LOGIN_SUCCESS":
             console.log("Login Success")
             return { 
                 ...state,
@@ -17,21 +15,21 @@ const authReducer = (state = initState, action) => {
                 
             }
 
-        case Type.LOGIN_GOOGLE_ERROR : 
+        case "LOGIN_GOOGLE_ERROR" : 
             return {
                 ...state,
                 authError: "Login Google Failed"
             }
-        case Type.LOGIN_GOOGLE_SUCCESS:
-           // console.log("Login Google Success")
+        case "LOGIN_GOOGLE_SUCCESS":
+            console.log("Login Google Success")
             return { 
                 ...state,
                 authError: null,
                 
             }
 
-        case Type.SIGN_OUT_SUCCESS:
-            //console.log("Signout success");
+        case "SIGN_OUT_SUCCESS":
+            console.log("Signout success");
             return state
             
 

@@ -4,6 +4,10 @@ import {signIn, signInWithGoogle} from '../../Store/Actions/authActions'
 
 import GoogleButton from 'react-google-button'
 import  {withRouter} from 'react-router-dom'
+
+
+
+
 class Signin extends Component {
 
     constructor(props) {
@@ -26,6 +30,8 @@ class Signin extends Component {
         e.preventDefault();
         this.props.signInWithGoogle();
         this.props.history.replace('/');
+        
+        
     }
     handleSubmit = (e) =>  {
         e.preventDefault();
@@ -33,20 +39,35 @@ class Signin extends Component {
     }
 
     render() {
-        let authError = this.props.authError
         return (
-            <div className = "container"> 
-                <form onSubmit = {this.handleSubmit} className = "white"> 
-                    
+            <div className = "container">
+            <div className="row">
+                 <h2><strong>Sign In </strong> </h2>
+                 
+                 <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                 <form onSubmit =  {this.handleSubmit    }>
+                   <div className="form-group"> 
+                     <label htmlFor="exampleInputEmail1">Email</label>
+                     <input type="email" className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" onChange= {this.handleChange}/>
+                     </div>
+                   <div className="form-group">
+                     <label htmlFor="exampleInputPassword1">Password</label>
+                     <input type="password" className="form-control" name="password" id="password" placeholder="Password" onChange= {this.handleChange}/>
+                   </div>
+                   <div className="form-check">
+                   <GoogleButton onClick = {this.handleGoogleLogin}/>
+                   <br/>
+                     <button type="submit" className="btn blue lighten-1 z-depth-0">Login</button>
+                   </div>
+                   
+                 </form>
+                 </div>
 
-                    <GoogleButton onClick = {this.handleGoogleLogin}/>
-
-                    
-
-                </form>
             </div>
-        );
-    }
+         </div> 
+     
+        )
+      }
 }
 
 const mapStateToProps = (state) => { 
