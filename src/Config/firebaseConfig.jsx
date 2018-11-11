@@ -4,12 +4,12 @@ import 'firebase/firebase-auth'
 import 'firebase/firebase-database'
 
 var config = {
-    apiKey: "AIzaSyBDXnQO4CmhfgvvTrduoRnt1Cx0t3lJmdQ",
-    authDomain: "chatapp074.firebaseapp.com",
-    databaseURL: "https://chatapp074.firebaseio.com",
-    projectId: "chatapp074",
-    storageBucket: "chatapp074.appspot.com",
-    messagingSenderId: "78211760043"
+  apiKey: "AIzaSyCswcn2ZftnA9CJFdgu4Yv6XXVQGwGrh-o",
+  authDomain: "chatapp092.firebaseapp.com",
+  databaseURL: "https://chatapp092.firebaseio.com",
+  projectId: "chatapp092",
+  storageBucket: "chatapp092.appspot.com",
+  messagingSenderId: "159371249098"
   };
 
 

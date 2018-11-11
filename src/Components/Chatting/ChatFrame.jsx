@@ -1,20 +1,14 @@
 import React, { Component } from 'react';
-
-
-//component
 import ChatHeader  from './ChatHeader'
 import ListFriend from './ListFriend'
-//
 import {connect} from 'react-redux'
 import { createConversation, sendMessage } from '../../Store/Actions/conversationActions';
 import { setPriorityFriend } from '../../Store/Actions/userActions';
-import ChatHistory from './ChatHistory';
-import { isEmpty, firestoreConnect } from 'react-redux-firebase';
+import MessageHistory from './MessageHistory';
+import {  firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
-
-//plugin
-import LoadingSpinner from '../Plugin/LoadingSpinner';
-import { HashUID } from '../../GlobalFunction/HashFunction';
+import Loading from '../Loading/Loading';
+import { HashUID } from '../../IDMessage/HashID';
 
 
 
@@ -23,7 +17,6 @@ class ChatFrame extends Component {
     handleClickFriends(userLogged,userClicked) { 
         this.props.history.replace("../chat/"+userClicked.uid);  
     }
-
     handleStarFriend(userClicked) { 
         this.props.setPriorityFriend(userClicked)
     }
@@ -39,7 +32,7 @@ class ChatFrame extends Component {
         
         var message = conversation.history
         var users =  conversation.users
-        var date = new Date(); // some mock date
+        var date = new Date();
         var lastMilliseconds = date.getTime();
         
         message.push( {
@@ -73,8 +66,7 @@ class ChatFrame extends Component {
         if (!userLogged.uid){ 
             return (
                 <div>
-                    <div className = "flow-text center"> <br/> Login to make great contact with friends </div>
-                    <div className = "center"> <br/> Signout by Click Button to definitely  sign out </div>
+                    <div className = "flow-text center"> <br/> Welcome to chat app - 1512092 </div>
                 </div>
                 
             )
@@ -83,7 +75,7 @@ class ChatFrame extends Component {
             
             console.log(typeof(conversations))
             return (
-                <LoadingSpinner/>
+                <Loading/>
             )
         }
         else if ( userLogged ) {
@@ -99,22 +91,12 @@ class ChatFrame extends Component {
                 <div>
                     <div className="container">
                 
-                    <ListFriend userLogged = {userLogged} users = {users}
-                                conversations = {conversations}
-                                onClick = {this.handleClickFriends.bind(this)} />
+                    <ListFriend userLogged = {userLogged} users = {users} onClick = {this.handleClickFriends.bind(this)} />
                     <div className="chat">
+    
+                        <ChatHeader  userLogged = {userLogged} conversations = {conversations} paramID = {paramID} users = {users} onClick = {this.handleStarFriend.bind(this)} />
                         
-                        <ChatHeader 
-                                    userLogged = {userLogged} conversations = {conversations} 
-                                    paramID = {paramID} users = {users} 
-                                    onClick = {this.handleStarFriend.bind(this)} 
-                        />
-                        
-                        <ChatHistory 
-                                    userLogged ={userLogged} users = {users}
-                                    conversations = {conversations} paramID = {paramID} 
-                                    onClick = {this.handleCreateConversation.bind(this)} 
-                        />
+                        <MessageHistory userLogged ={userLogged} users = {users} conversations = {conversations} paramID = {paramID} onClick = {this.handleCreateConversation.bind(this)}/>
                         
                         { conversation?
                             <div className="chat-message clearfix">

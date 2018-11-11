@@ -1,15 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { isEmpty } from 'react-redux-firebase';
-import LoadingSpinner from '../Plugin/LoadingSpinner';
+import Loading from '../Loading/Loading';
 import moment from 'moment';
-import ReactAvatar from 'react-avatar';
+import Avatar from 'react-avatar';
 
-function mapStateToProps(state) {
-    return {
-
-    };
-}
 
 var buttonStyle = {
     backgroundColor: "Transparent",
@@ -19,16 +14,17 @@ var buttonStyle = {
     outline:"none"
 }
 
-const ListFriend = ({userLogged, users, conversations, onClick}) => { 
+const ListFriend = ({userLogged, users, onClick}) => { 
     console.log(users);
     var friends = users;
+
     if(isEmpty(friends)) { 
         return (
             <div className="people-list" id="people-list">
             <div className="search">
             <input type="text" placeholder="Search..." />
             </div>
-            <LoadingSpinner/>
+            <Loading/>
             </div>
         )
     }
@@ -75,7 +71,7 @@ const ListFriend = ({userLogged, users, conversations, onClick}) => {
                             <button style = {buttonStyle} key = {index} onClick = {() => onClick   (userLogged,each)}>
                             <li className="clearfix" key={index}>
                             
-                            <ReactAvatar size="70"  src={each.photoURL}  className ="left" round = {true}/>
+                            <Avatar size="70"  src={each.photoURL}  className ="left" round = {true}/>
                             <div className="about">
                                 {each.priority === true ?
                                 <div className="name white-text">{each.displayName}<i className="fa fa-star online right"></i></div>
@@ -97,6 +93,4 @@ const ListFriend = ({userLogged, users, conversations, onClick}) => {
         }
 }
 
-export default connect(
-    mapStateToProps,
-)(ListFriend);
+export default ListFriend;

@@ -41,7 +41,7 @@ class Navbar extends Component {
         }
         
         return (
-            <nav className = "nav-wrapper grey darken-3">
+            <nav className = "nav-wrapper grey darken-4">
                 <div className = "container">
                     <a href= "/" className = "brand-logo">Chat App</a>
                     {links}
@@ -49,6 +49,7 @@ class Navbar extends Component {
             </nav>
         )
     }
+
 }
 
 

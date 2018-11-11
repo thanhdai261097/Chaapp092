@@ -48,30 +48,6 @@ export const createConversation = (authUser,userClicked) => {
                 err: err,
             });
         })
-
-        // firebase.database().ref('conversation/' + hashID ).update({
-            
-        //     users:[
-        //         {user: authUser},
-        //         {user:  userClicked}
-        //     ],
-        //     timeCreatedAt: createMilisecond,
-        //     history: [{
-        //         sendAt: createMilisecond,
-        //         text: "Hello !",
-        //         uid: authUser.uid
-        //     }]
-        // }).then( () => { 
-        //     dispatch({ 
-        //         type: "CREAT_CONVERSATION_SUCCESS",
-        //     })
-        // }).catch( err => { 
-        //     dispatch({ 
-        //         type: "CREAT_CONVERSATION_ERROR",
-        //         err: err,
-        //     })
-        // });
-        
     }
 }
 

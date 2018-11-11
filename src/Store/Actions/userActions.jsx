@@ -78,10 +78,7 @@ export const setUserOffline = (userAuth) => {
 
 export const setPriorityFriend = (userAuth) => { 
     return (dispatch,getState, {getFirebase, getFirestore}) => { 
-        // const firebase = getFirebase();
-
         const firestore = getFirestore();
-
         firestore.collection('users').doc(userAuth.uid.toString()).update({
             priority: !userAuth.priority,
         }).then (() =>{ 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import {signIn, signInWithGoogle} from '../../Store/Actions/authActions'
+import {signInWithGoogle} from '../../Store/Actions/authActions'
 
 import GoogleButton from 'react-google-button'
 import  {withRouter} from 'react-router-dom'
@@ -41,29 +41,15 @@ class Signin extends Component {
     render() {
         return (
             <div className = "container">
-            <div className="row">
-                 <h2><strong>Sign In </strong> </h2>
-                 
-                 <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                 <form onSubmit =  {this.handleSubmit    }>
-                   <div className="form-group"> 
-                     <label htmlFor="exampleInputEmail1">Email</label>
-                     <input type="email" className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" onChange= {this.handleChange}/>
-                     </div>
-                   <div className="form-group">
-                     <label htmlFor="exampleInputPassword1">Password</label>
-                     <input type="password" className="form-control" name="password" id="password" placeholder="Password" onChange= {this.handleChange}/>
-                   </div>
-                   <div className="form-check">
-                   <GoogleButton onClick = {this.handleGoogleLogin}/>
-                   <br/>
-                     <button type="submit" className="btn blue lighten-1 z-depth-0">Login</button>
-                   </div>
-                   
-                 </form>
-                 </div>
-
-            </div>
+            
+             <div className = "flow-text center"> <br/> Welcome to chat app - 1512092 </div>
+                <br/>
+            <center>
+                    <div>You can sign in with Google </div>
+                        <br/>
+                                <GoogleButton onClick = {this.handleGoogleLogin}/>
+                        <br/>
+            </center>
          </div> 
      
         )
@@ -78,7 +64,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => { 
     return { 
-        signIn: (creds) => dispatch(signIn(creds)),
         signInWithGoogle: () => dispatch(signInWithGoogle()),
     }
 }

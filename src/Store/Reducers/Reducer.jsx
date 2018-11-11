@@ -1,19 +1,16 @@
-
-// myRedcuer
 import authReducer from './authReducer'
-import  userDatabaseReducer from "./userDatabaseReducer"
+import  usersReducer from "./usersReducer"
 import conversationReducer from "./conversationReducer"
-//FirebaseReducer
 import {combineReducers} from 'redux'
 import { firestoreReducer} from 'redux-firestore'
 import {firebaseReducer} from 'react-redux-firebase'
 
-const rootReducer = combineReducers( { 
+const Reducers = combineReducers( { 
     auth:authReducer,
-    users: userDatabaseReducer,
+    users: usersReducer,
     conversation: conversationReducer,
     firestore: firestoreReducer,
     firebase: firebaseReducer,
 })
 
-export default  rootReducer
+export default  Reducers

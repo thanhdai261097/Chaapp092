@@ -1,16 +1,17 @@
-
 import React from 'react';
 import { css } from 'react-emotion';
-// First way to import
 import { ClipLoader } from 'react-spinners';
 
 const override = css`
     display: block;
     margin: 0 auto;
-    border-color: red;
+    type="Puff"
+    color="#00BFFF"
+    height="150"	
+    width="150"
 `;
  
-export default class LoadingSpinner extends React.Component {
+class Loading extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,9 +24,6 @@ export default class LoadingSpinner extends React.Component {
       <center>
         <ClipLoader
           className={override}
-          sizeUnit={"px"}
-          size={50}
-          color={"green"}
           loading={this.state.loading}
         />
         </center>
@@ -33,3 +31,4 @@ export default class LoadingSpinner extends React.Component {
     )
   }
 }
+export default Loading

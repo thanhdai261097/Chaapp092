@@ -1,15 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { isEmpty } from 'react-redux-firebase';
 import moment from 'moment';
-import LoadingSpinner from '../Plugin/LoadingSpinner';
-import { HashUID } from '../../GlobalFunction/HashFunction';
+import { HashUID } from '../../IDMessage/HashID';
 
-function mapStateToProps(state,ownProps) {
-    return {
-
-    };
-}
 
 var buttonStyle = {
   backgroundColor: "Transparent",
@@ -19,9 +12,9 @@ var buttonStyle = {
   outline:"none"
 }
 
-const ChatHistory  = ({userLogged, users, conversations, paramID, onClick, }) => {
+const MessageHistory  = ({userLogged, users, conversations, paramID, onClick, }) => {
 
-  var list = users.filter( each=> each.id === paramID) // getListUser match param ID
+  var list = users.filter( each=> each.id === paramID) 
   var friend = list[0]
 
   
@@ -66,7 +59,7 @@ const ChatHistory  = ({userLogged, users, conversations, paramID, onClick, }) =>
                         
                           if(each.position === "right") { 
                             return (
-                            /* My message */
+                            
                                   <li className="clearfix" key = {index}>
 
                                       <div className="message-data align-right">
@@ -109,6 +102,4 @@ const ChatHistory  = ({userLogged, users, conversations, paramID, onClick, }) =>
   }
 }
 
-export default connect(
-    mapStateToProps,
-)(ChatHistory);
+export default MessageHistory;

@@ -1,16 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { isEmpty } from 'react-redux-firebase';
-import ReactAvatar from 'react-avatar';
+import Avatar from 'react-avatar';
 
 
-//Global function 
-import {HashUID} from '../../GlobalFunction/HashFunction'
-function mapStateToProps(state, ownProps) {
-    return {
+import {HashUID} from '../../IDMessage/HashID'
 
-    };
-}
 
 var buttonStyle = {
     backgroundColor: "Transparent",
@@ -23,21 +18,14 @@ var buttonStyle = {
 
 const ChatHeader = ({userLogged, conversations, paramID, users,onClick}) => { 
 
-        var list = users.filter( each=> each.id === paramID) // getListUser match param ID
+        var list = users.filter( each=> each.id === paramID) 
         var friend = list[0]
 
-        
         if (isEmpty(friend)) { 
             return (
                 <div className="chat-header clearfix">
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar" />
-
-                <div className="chat-about">
-                    <div className="chat-with">-------</div>
-                    <div className="chat-num-messages">--------</div>
+                <Avatar src="http://voice4thought.org/wp-content/uploads/2016/08/default2-1.jpg" className = "left" size = {50} round = {true}/>
                 </div>
-                
-            </div>
             );
         }
         else {
@@ -49,7 +37,7 @@ const ChatHeader = ({userLogged, conversations, paramID, users,onClick}) => {
         return (
             <div className="chat-header clearfix">
             
-            <ReactAvatar src={friend.photoURL} size ={50} className ="left" round={true}/>
+            <Avatar src={friend.photoURL} size ={50} className ="left" round={true}/>
             <div className="chat-about">
                 <div className="chat-with ">{friend.displayName}</div>
                 {conversation? <div className="chat-num-messages left">already {conversation.history? conversation.history.length:0} messages</div>:<div className="chat-num-messages left">no messages</div> }
@@ -60,6 +48,4 @@ const ChatHeader = ({userLogged, conversations, paramID, users,onClick}) => {
     }
 }
 
-export default connect(
-    mapStateToProps,
-)(ChatHeader);
+export default ChatHeader;

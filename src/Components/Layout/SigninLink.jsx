@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
-
+import Avatar from 'react-avatar'
 import {connect} from "react-redux"
-
-//Action
 import {setUserOffline} from '../../Store/Actions/userActions'
 import {signOut} from '../../Store/Actions/authActions'
-
 import {Container} from 'reactstrap'
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class SigninLink extends Component {
@@ -30,34 +26,22 @@ class SigninLink extends Component {
 
 
       handleLogOut (userLogged) { 
+        this.props.setUserOffline(userLogged)
           this.props.signOut()
-          this.props.setUserOffline(userLogged)
+         
       }
     render() {
         const userLogged = this.props.auth
-        const signOutBtn = <NavLink className ="red-text"to = "/signin" onClick = { () => {this.handleLogOut(userLogged)}}>Sign Out</NavLink>
-        // const avatarBtn =<Avatar googleID={this.props.auth.providerData["0"].uid} size = {40} round = {true}/>
-        const dropDownButton = (
-            <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                    
-                    <DropdownToggle >
-                    {userLogged.displayName}
-                    </DropdownToggle>
-                    <DropdownMenu>
-                    <DropdownItem header>User</DropdownItem>
-                    <DropdownItem>Profile</DropdownItem>
-                    <DropdownItem divider />
-                    <DropdownItem>{signOutBtn}</DropdownItem>
-                    </DropdownMenu>
-            </Dropdown>
-        )
         return (
-            <Container>
+        <Container>
         <ul className = "right">
-            <li> <a href = "/"><Button color="info">Chat</Button></a> </li>
-            <li> {dropDownButton}</li>
+            <li> <a to = "/signin" onClick = { () => {this.handleLogOut(userLogged)}}>Sign Out</a> </li>
+            <li><Avatar src ={this.props.auth.photoURL} className = "right" size = {60} round = {true}/></li>
+            <li> <a>{this.props.auth.displayName}</a></li>
+            
         </ul>
         </Container>
+        
         );
     }
 }
