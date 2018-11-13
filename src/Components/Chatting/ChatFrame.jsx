@@ -9,7 +9,7 @@ import {  firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import Loading from '../Loading/Loading';
 import { HashUID } from '../../IDMessage/HashID';
-
+import {SearchName} from '../../IDMessage/Search'
 
 
 class ChatFrame extends Component {
@@ -60,9 +60,9 @@ class ChatFrame extends Component {
         const userLogged = this.props.auth
         const paramID = this.props.match.params.id
 
-        const users = this.props.fireStore.users;
+        var users = this.props.fireStore.users;
         const conversations = this.props.fireStore.conversations;
-        
+        var friend
         if (!userLogged.uid){ 
             return (
                 <div>
@@ -89,9 +89,24 @@ class ChatFrame extends Component {
             
             return (
                 <div>
+                    
                     <div className="container">
-                
-                    <ListFriend userLogged = {userLogged} users = {users} onClick = {this.handleClickFriends.bind(this)} />
+                    <div className="people-list" id="people-list">
+                            <div className="search">
+                            <input type="text" placeholder="Search..." 
+                            onChange = {e => {
+                                e.preventDefault()
+                                var name = e.target.value
+                               console.log("afsdfasdfasfd: "+ name)
+                                friend = SearchName(userLogged,name,users)
+                            console.log(users)
+                            console.log(friend)
+                            users = friend
+                            }}/>
+                        </div>
+                        <ListFriend userLogged = {userLogged} users = {users} onClick = {this.handleClickFriends.bind(this)} />
+                    </div>
+                   
                     <div className="chat">
     
                         <ChatHeader  userLogged = {userLogged} conversations = {conversations} paramID = {paramID} users = {users} onClick = {this.handleStarFriend.bind(this)} />
@@ -130,6 +145,7 @@ const mapDispatchToProps = (dispatch) => {
         setPriorityFriend: (user) => dispatch (setPriorityFriend(user)),
         createConversation: (authUser,userClicked) => dispatch(createConversation(authUser,userClicked)),
         sendMessage:(authUID,paramUID,message) =>  dispatch(sendMessage(authUID,paramUID,message)),
+        
     }
 }
  

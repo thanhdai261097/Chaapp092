@@ -7,6 +7,7 @@ import {signOut} from '../../Store/Actions/authActions'
 import {Container} from 'reactstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
 class SigninLink extends Component {
     constructor(props) {
         super(props);
@@ -27,7 +28,7 @@ class SigninLink extends Component {
 
       handleLogOut (userLogged) { 
         this.props.setUserOffline(userLogged)
-          this.props.signOut()
+        this.props.signOut()
          
       }
     render() {

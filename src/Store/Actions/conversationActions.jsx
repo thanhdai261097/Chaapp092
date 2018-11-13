@@ -16,10 +16,9 @@ function hashConversationID(a,b) {
 
 export const createConversation = (authUser,userClicked) => { 
     return (dispatch,getState, {getFirebase, getFirestore}) => { 
-        const firebase = getFirebase();
         const firestore = getFirestore();
         const hashID = hashConversationID(authUser.uid,userClicked.uid)
-
+        var hi = "Hello " + userClicked.displayName
         var date = new Date(); // some mock date
         var createMilisecond = date.getTime();
 
@@ -34,7 +33,7 @@ export const createConversation = (authUser,userClicked) => {
             lastMessage: 0,
             history: [{
                 sendAt: createMilisecond,
-                text: "Hello !",
+                text: hi,
                 uid: authUser.uid
             }]
 

@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
-
-//Component
 import SigninLink from './SigninLink';
 import SignoutLink from './SignoutLink';
-
-//Action
 import {createUser,setUserOnline} from '../../Store/Actions/userActions'
 
-//
 import {connect} from 'react-redux'
 import {firestoreConnect, isLoaded} from 'react-redux-firebase'
 import {compose} from 'redux'
-
+import { NavLink } from 'react-router-dom'
 
 class Navbar extends Component {
     constructor(props) {
@@ -36,14 +31,10 @@ class Navbar extends Component {
                 isLoaded: true,
             })
         }
-        else { 
-
-        }
-        
         return (
             <nav className = "nav-wrapper grey darken-4">
                 <div className = "container">
-                    <a href= "/" className = "brand-logo">Chat App</a>
+                    <a href = "/" className = "brand-logo">Chat App</a>
                     {links}
                 </div>
             </nav>

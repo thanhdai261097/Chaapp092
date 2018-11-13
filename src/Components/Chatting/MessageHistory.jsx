@@ -2,7 +2,8 @@ import React from 'react';
 import { isEmpty } from 'react-redux-firebase';
 import moment from 'moment';
 import { HashUID } from '../../IDMessage/HashID';
-
+import Avatar from 'react-avatar'
+import isUrl from "is-url"
 
 var buttonStyle = {
   backgroundColor: "Transparent",
@@ -10,6 +11,16 @@ var buttonStyle = {
   cursor: "pointer",
   overflow: "hidden",
   outline:"none"
+}
+
+var linkImageStyle = {
+  wordWrap: "break-word",
+} 
+
+var imageStyle ={ 
+  width : "auto",
+  height : "auto",
+  maxWidth: "100%",
 }
 
 const MessageHistory  = ({userLogged, users, conversations, paramID, onClick, }) => {
@@ -20,13 +31,13 @@ const MessageHistory  = ({userLogged, users, conversations, paramID, onClick, })
   
    if (isEmpty(friend)) {
     return (
-      <div className = "card-action grey lighten-4 grey-text center flow-text">Click avatar on the left to chat with friends</div>
+      <div className = "card-action grey lighten-4 grey-text center flow-text">Click avatar, you can chat with your friend</div>
     )
     }
     else if(paramID === "t") {
 
         return (
-          <div className = "card-action grey lighten-4 grey-text center flow-text">Click avatar on the left to chat with friends</div>
+          <div className = "card-action grey lighten-4 grey-text center flow-text">Click avatar, you can chat with your friend</div>
         )
  
     
@@ -35,6 +46,9 @@ const MessageHistory  = ({userLogged, users, conversations, paramID, onClick, })
       var hashCode = HashUID(paramID,userLogged.uid);
       var listConversation = conversations.filter (each => each.id === hashCode.toString())
       const conversation = listConversation[0];
+      console.log("asdasdf")
+      //console.log(console.log(conversation.users[0]["user"].displayName))
+             
       if ( conversation) 
       {
         conversation.history.map ( each => { 
@@ -42,9 +56,19 @@ const MessageHistory  = ({userLogged, users, conversations, paramID, onClick, })
             { 
               each.position = "right"
               each.displayName = userLogged.displayName
+              each.photoURL = userLogged.photoURL
             }
             else {
               each.position = "left"
+              if(conversation.users[0]["user"].uid === userLogged.uid)
+              {
+               each.photoURL = conversation.users[1]["user"].photoURL
+               each.displayName = conversation.users[1]["user"].displayName
+              }
+              else{
+                each.photoURL = conversation.users[0]["user"].photoURL
+                each.displayName = conversation.users[0]["user"].displayName
+              }
             }
         })
 
@@ -55,8 +79,8 @@ const MessageHistory  = ({userLogged, users, conversations, paramID, onClick, })
                       {conversation.history.map((each,index) => {
 
                           const sec = parseInt(each.sendAt)
-                          const date = moment(new Date(sec)).format('l') + " - "  +moment(new Date(sec)).format('LT')
-                        
+                          const date = moment(new Date(sec)).format('LT')  + " - "  + moment(new Date(sec)).format('l')
+
                           if(each.position === "right") { 
                             return (
                             
@@ -68,7 +92,17 @@ const MessageHistory  = ({userLogged, users, conversations, paramID, onClick, })
                                       </div>
 
                                       <div className="message other-message right ">
-                                          <div className = "right"> {each.text}</div>
+                                          <div className = "right">
+                                          {isUrl(each.text) ?
+                                        <div style = {linkImageStyle} >
+                                        {(each.text.search("firebasestorage") > 0) ? null  :<a style = {linkImageStyle} target="_blank" rel="noopener noreferrer" href={each.text}>{each.text}</a>}
+                                        
+                                        <a style = {linkImageStyle} target="_blank" rel="noopener noreferrer" href={each.text}><img style ={imageStyle} src = {each.text}  alt = {each.text}></img> </a>
+                                        </div>
+                                        :
+                                        <div> {each.text}</div> 
+                                         }
+                                           </div>
                                       </div>
                                   </li>
                             )
@@ -76,14 +110,23 @@ const MessageHistory  = ({userLogged, users, conversations, paramID, onClick, })
 
                           else  { 
                             return(
-                                <li key = {index}>
+                                <li className = "clearfix" key = {index}> 
                                   <div className="message-data">
-                                      <span className="message-data-name left"><i className="fa fa-circle online"></i> {each.displayName}</span>
+                                  <Avatar src={each.photoURL} size ={35} className ="left" round={true}/> &nbsp; &nbsp;
+                                  <i className="fa fa-circle online"></i>  <span className="message-data-name">{each.displayName}</span>
                                       <span className="message-data-time">{date}</span>
 
                                   </div>
                                   <div className="message my-message left">
-                                        {each.text}
+                                  {isUrl(each.text) ?
+                                        <div style = {linkImageStyle} >
+                                        {(each.text.search("firebasestorage") > 0) ? null  :<a style = {linkImageStyle} target="_blank" rel="noopener noreferrer" href={each.text}>{each.text}</a>}
+                                        
+                                        <a style = {linkImageStyle} target="_blank" rel="noopener noreferrer" href={each.text}><img style ={imageStyle} src = {each.text}  alt = {each.text}></img> </a>
+                                        </div>
+                                        :
+                                        <div> {each.text}</div> 
+                                  }
                                   </div>
                                 </li>
                             )

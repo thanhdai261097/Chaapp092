@@ -42,7 +42,7 @@ const ChatHeader = ({userLogged, conversations, paramID, users,onClick}) => {
                 <div className="chat-with ">{friend.displayName}</div>
                 {conversation? <div className="chat-num-messages left">already {conversation.history? conversation.history.length:0} messages</div>:<div className="chat-num-messages left">no messages</div> }
             </div>
-            <button style = {buttonStyle}onClick ={() => onClick(friend)}>{friend.priority === true?<i className="fa fa-star right"></i>:<i className="fa fa-star-o right"></i>}</button>
+         <button style = {buttonStyle}onClick ={() => onClick(friend)}>{friend.priority === true?<i className="fa fa-star center"></i>:<i className="fa fa-star-o center"></i>}</button>
         </div>
         );
     }

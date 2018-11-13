@@ -4,7 +4,7 @@ import { isEmpty } from 'react-redux-firebase';
 import Loading from '../Loading/Loading';
 import moment from 'moment';
 import Avatar from 'react-avatar';
-
+import {SearchName} from '../../IDMessage/Search'
 
 var buttonStyle = {
     backgroundColor: "Transparent",
@@ -20,12 +20,9 @@ const ListFriend = ({userLogged, users, onClick}) => {
 
     if(isEmpty(friends)) { 
         return (
-            <div className="people-list" id="people-list">
-            <div className="search">
-            <input type="text" placeholder="Search..." />
-            </div>
+       
             <Loading/>
-            </div>
+        
         )
     }
     else {
@@ -51,16 +48,14 @@ const ListFriend = ({userLogged, users, onClick}) => {
                 return 0
             }
         })
-       
-        console.log(friends);
+        console.log("ádfdasasdf")
+       // console.log(text);
         
         
         return (
-                <div className="people-list" id="people-list">
-                <div className="search">
-                    <input type="text" placeholder="Search..." />
-                </div>
-    
+             
+         
+                
                 <ul className="list">
                     {friends.map((each,index) => {
                         
@@ -71,14 +66,14 @@ const ListFriend = ({userLogged, users, onClick}) => {
                             <button style = {buttonStyle} key = {index} onClick = {() => onClick   (userLogged,each)}>
                             <li className="clearfix" key={index}>
                             
-                            <Avatar size="70"  src={each.photoURL}  className ="left" round = {true}/>
+                            <Avatar size="50"  src={each.photoURL}  className ="left" round = {true}/>
                             <div className="about">
                                 {each.priority === true ?
-                                <div className="name white-text">{each.displayName}<i className="fa fa-star online right"></i></div>
+                                <div className="name white-text ">{each.displayName}<i className="fa fa-star online right"></i></div>
                                 :<div className="name white-text">{each.displayName}</div>}
 
                                 <div className="status">
-                                {each.status === "online"? <div>{each.status} <i className="fa fa-circle online"></i> </div> : <div> offline: {moment(date).fromNow() } <i className="fa fa-circle offline"></i></div>}
+                                {each.status === "online"? <div>{each.status} <i className="fa fa-circle online"></i> </div> : <div> online {moment(date).fromNow() } <i className="fa fa-circle offline"></i></div>}
 
                                 </div>
                             </div>
@@ -88,7 +83,7 @@ const ListFriend = ({userLogged, users, onClick}) => {
                         )
                     })}
                 </ul>
-                </div>
+                
             )
         }
 }
