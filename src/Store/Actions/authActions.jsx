@@ -1,3 +1,5 @@
+import * as Type from "../Actions/Actiontypes"
+
 export const signInWithGoogle = (credentials) => { 
     return (dispatch, getState, {getFirebase}) => { 
         const firebase = getFirebase();
@@ -9,11 +11,11 @@ export const signInWithGoogle = (credentials) => {
         ).then(() => 
             {          
             dispatch({
-                type: "LOGIN_GOOGLE_SUCCESS"})
+                type: Type.Login})
             }).catch((err)=> 
             { 
                 dispatch({ 
-                    type: "LOGIN_GOOGLE_ERROR",
+                    type: Type.LoginErr,
                     err:err,
             })
         })
@@ -28,7 +30,7 @@ export const signOut = () => {
          
         firebase.auth().signOut().then( () => {
             dispatch({
-                type: "SIGN_OUT_SUCCESS"
+                type: Type.SignOut
             })
         })
     }  

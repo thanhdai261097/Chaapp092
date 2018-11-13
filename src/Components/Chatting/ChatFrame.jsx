@@ -8,8 +8,9 @@ import MessageHistory from './MessageHistory';
 import {  firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import Loading from '../Loading/Loading';
-import { HashUID } from '../../IDMessage/HashID';
+import { IDMess } from '../../IDMessage/IDMess';
 import {SearchName} from '../../IDMessage/Search'
+//import { URLSearchParams } from 'url';
 
 
 class ChatFrame extends Component {
@@ -55,13 +56,16 @@ class ChatFrame extends Component {
        
     }
 
+
     render() {
         
         const userLogged = this.props.auth
         const paramID = this.props.match.params.id
 
-        var users = this.props.fireStore.users;
+        const users = this.props.fireStore.users;
         const conversations = this.props.fireStore.conversations;
+        //this.friends = users
+        var name
         var friend
         if (!userLogged.uid){ 
             return (
@@ -81,7 +85,7 @@ class ChatFrame extends Component {
         else if ( userLogged ) {
             
             
-            var hashCode = HashUID(paramID,userLogged.uid); 
+            var hashCode = IDMess(paramID,userLogged.uid); 
             var listConversation = conversations.filter (each => each.id === hashCode.toString())
             const conversation = listConversation[0]
             
@@ -96,13 +100,23 @@ class ChatFrame extends Component {
                             <input type="text" placeholder="Search..." 
                             onChange = {e => {
                                 e.preventDefault()
-                                var name = e.target.value
+                                name = e.target.value
+                              
                                console.log("afsdfasdfasfd: "+ name)
-                                friend = SearchName(userLogged,name,users)
-                            console.log(users)
-                            console.log(friend)
-                            users = friend
+                                
+                             friend = SearchName(userLogged,name,users)
+                            this.friends = friend
+                                if(name = "")
+                                {
+                                  //  friends = users
+                                }
+                           // console.log(users)
+                           // console.log(this.friends)
+                            console.log(this.friends)
+                            
+                            //users = friend
                             }}/>
+                            
                         </div>
                         <ListFriend userLogged = {userLogged} users = {users} onClick = {this.handleClickFriends.bind(this)} />
                     </div>
@@ -132,11 +146,11 @@ class ChatFrame extends Component {
 }
 
 const mapStateToProps = (state) => { 
-    console.log(state.firestore);
-    
+    console.log(state);
     return { 
         auth: state.firebase.auth,
-        fireStore: state.firestore.ordered
+        fireStore: state.firestore.ordered,
+       friends: state.SearchName
     }
 }
 

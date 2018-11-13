@@ -4,7 +4,7 @@ import { isEmpty } from 'react-redux-firebase';
 import Avatar from 'react-avatar';
 
 
-import {HashUID} from '../../IDMessage/HashID'
+import {IDMess} from '../../IDMessage/IDMess'
 
 
 var buttonStyle = {
@@ -29,7 +29,7 @@ const ChatHeader = ({userLogged, conversations, paramID, users,onClick}) => {
             );
         }
         else {
-            var hashCode = HashUID(paramID,userLogged.uid); 
+            var hashCode = IDMess(paramID,userLogged.uid); 
             var listConversation = conversations.filter (each => each.id === hashCode.toString())
             const conversation = listConversation[0]
              

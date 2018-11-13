@@ -1,4 +1,5 @@
-export const HashUID = (UID1,UID2) => { 
+export const IDMess
+ = (UID1,UID2) => { 
     
     UID1 = UID1? UID1: "";
     UID2 = UID2? UID2: "";

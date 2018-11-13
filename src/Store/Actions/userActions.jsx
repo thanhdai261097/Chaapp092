@@ -1,10 +1,10 @@
+import * as Type from "../Actions/Actiontypes"
+
 
 export const createUser = (user) => {
     
     return (dispatch,getState, {getFirebase, getFirestore}) => { 
         const firestore = getFirestore();
-        const getListUser = []
-        
         firestore.collection('users').doc(user.uid).set({                    
             ...user,
             status: "online",
@@ -13,11 +13,11 @@ export const createUser = (user) => {
             lastLoginAt: null,
         }).then( () =>  { 
             dispatch({
-                type: "CREATE_USER",
+                type: Type.CreateUser,
             });
         }).catch((err) => {
             dispatch({
-                type: "CREATE_USER_ERROR",
+                type: Type.CreateUserErr,
                 err: err,
             });
         })
@@ -28,7 +28,6 @@ export const createUser = (user) => {
 
 export const setUserOnline = (userAuth) => { 
     return (dispatch,getState, {getFirebase, getFirestore}) => { 
-        const firebase = getFirebase();
         const firestore = getFirestore(); 
 
 
@@ -36,11 +35,11 @@ export const setUserOnline = (userAuth) => {
             status: "online",
         }).then (() =>{ 
             dispatch({ 
-                type: "SET_USER_ONLINE_SUCCESS",
+                type: Type.SetUserOnline,
             })
         }).catch((err) => {
             dispatch({ 
-                type: "SET_USER_ONLINE_ERROR",
+                type: Type.SetUserOnlineErr,
                 err: err,
             })
         })
@@ -51,9 +50,8 @@ export const setUserOnline = (userAuth) => {
 
 export const setUserOffline = (userAuth) => { 
     return (dispatch, getState, {getFirebase, getFirestore}) => { 
-        // const firebase = getFirebase();
         
-        var date = new Date(); // some mock date
+        var date = new Date(); 
         var lastMilliseconds = date.getTime();
 
         const firestore = getFirestore();
@@ -63,11 +61,11 @@ export const setUserOffline = (userAuth) => {
             lastLoginAt: lastMilliseconds,
         }).then (() =>{ 
             dispatch({ 
-                type: "SET_USER_OFFLINE_SUCCESS",
+                type: Type.SetUserOffline,
             })
         }).catch((err) => {
             dispatch({ 
-                type: "SET_USER_OFFLINE_ERROR",
+                type: Type.SetUserOfflineErr,
                 err: err,
             })
         })
@@ -83,11 +81,11 @@ export const setPriorityFriend = (userAuth) => {
             priority: !userAuth.priority,
         }).then (() =>{ 
             dispatch({ 
-                type: "SET_USER_OFFLINE_SUCCESS",
+                type: Type.SetStar,
             })
         }).catch((err) => {
             dispatch({ 
-                type: "SET_USER_OFFLINE_ERROR",
+                type: Type.SetStarErr,
                 err: err,
             })
         })

@@ -1,28 +1,24 @@
+import * as Type from "../Actions/Actiontypes"
+
 const initState = {}
 const conversationReducers = (state = initState, action) => { 
     switch( action.type ) { 
-        case "CREAT_CONVERSATION_SUCCESS":
-            console.log('CREAT_CONVERSATION_SUCCESS');
+        case Type.CreateConversation:
             return state;
-        case "CREAT_CONVERSATION_ERROR":
-            console.log('CREAT_CONVERSATION_ERROR', action.err);
+        case Type.CreateConversationErr:
             return state;        
-        case "GET_CONVERSATION_SUCCESS":
-            console.log('GET_CONVERSATION_SUCCESS');
+        case Type.GetConversation:
             return {
                 conversation: action.conversation,
                 userClicked: action.userClicked
             }
                 
-        case "GET_CONVERSATION_ERROR":
-            console.log('GET_CONVERSATION_ERROR', action.err);
+        case Type.GetConversationErr:
             return state;
                   
-        case "SEND_MESSAGE_SUCCESS":
-            console.log('SEND_MESSAGE_SUCCESS');
+        case Type.SendMess:
             return action.conversation;
-        case "SEND_MESSAGE_ERROR":
-            console.log('SEND_MESSAGE_ERROR', action.err);
+        case Type.SendMessErr:
             return state;
 
 

@@ -4,7 +4,7 @@ import { isEmpty } from 'react-redux-firebase';
 import Loading from '../Loading/Loading';
 import moment from 'moment';
 import Avatar from 'react-avatar';
-import {SearchName} from '../../IDMessage/Search'
+import SearchName from '../../IDMessage/Search'
 
 var buttonStyle = {
     backgroundColor: "Transparent",
@@ -17,7 +17,8 @@ var buttonStyle = {
 const ListFriend = ({userLogged, users, onClick}) => { 
     console.log(users);
     var friends = users;
-
+    var name
+ 
     if(isEmpty(friends)) { 
         return (
        
@@ -48,14 +49,13 @@ const ListFriend = ({userLogged, users, onClick}) => {
                 return 0
             }
         })
-        console.log("ádfdasasdf")
-       // console.log(text);
+    
         
         
         return (
              
          
-                
+            
                 <ul className="list">
                     {friends.map((each,index) => {
                         

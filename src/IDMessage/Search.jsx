@@ -1,8 +1,8 @@
- export function SearchName(userLogged, name, users){
+ export const  SearchName = (userLogged, name, users) =>{
  
-    var listUser = users.filter(each => each.uid !== userLogged.uid)
-    console.log(listUser)
-    var listUsers = listUser.filter(each => each.displayName.toLowerCase().search(name.toLowerCase()) !== -1 )
-  
+    var listUsers = users.filter(each => (each.displayName.toLowerCase().search(name.toLowerCase()) >= 0))
+    console.log(listUsers);
+    var listUser = listUsers.filter(each => each.uid !== userLogged.uid)
+    
     return listUsers
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { isEmpty } from 'react-redux-firebase';
 import moment from 'moment';
-import { HashUID } from '../../IDMessage/HashID';
+import { IDMess } from '../../IDMessage/IDMess';
 import Avatar from 'react-avatar'
 import isUrl from "is-url"
 
@@ -43,7 +43,7 @@ const MessageHistory  = ({userLogged, users, conversations, paramID, onClick, })
     
   }
   else {
-      var hashCode = HashUID(paramID,userLogged.uid);
+      var hashCode = IDMess(paramID,userLogged.uid);
       var listConversation = conversations.filter (each => each.id === hashCode.toString())
       const conversation = listConversation[0];
       console.log("asdasdf")
